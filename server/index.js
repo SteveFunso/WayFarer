@@ -1,5 +1,4 @@
 import express from 'express';
-import UserService from './services/UserServices';
 import Response from './model/Response';
 import userRouter from './routes/UserRouter';
 
