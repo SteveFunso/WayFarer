@@ -2,13 +2,6 @@ import APIError from '../model/errors';
 import Response from '../model/Response';
 import UserServices from '../services/UserServices';
 
-function checkPasswordComplexity(pwd) {
-  const letter = /[a-zA-Z]/;
-  const number = /[0-9]/;
-  const valid = number.test(pwd) && letter.test(pwd);
-  return valid;
-}
-
 
 /* eslint-disable camelcase */
 export default class UserMiddleware {
@@ -75,9 +68,7 @@ export default class UserMiddleware {
       if (typeof password !== 'string') {
         throw new APIError(400, 'Password must be a field');
       }
-      if (checkPasswordComplexity(password) === false) {
-        throw new APIError(400, 'passwords only accepts aplha numeric characters');
-      } const user = await UserServices.findUserByEmail(req.body.email);
+      const user = await UserServices.findUserByEmail(req.body.email);
       if (user.length === 0) {
         throw new APIError(400, 'email address does not exists');
       }
@@ -85,7 +76,8 @@ export default class UserMiddleware {
       next();
     } catch (error) {
       res.status(error.statusCode || 500).json(
-        new Response(false, error.statusCode || 500, error.message));
+        new Response(false, error.statusCode || 500, error.message)
+);
     }
   }
 
