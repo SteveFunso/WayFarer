@@ -123,9 +123,9 @@ export default class UserMiddleware {
 
   static async validateCreateTrip(req, res, next) {
     try {
-      // console.log(req.body);
+      console.log(req.body);
       // eslint-disable-next-line object-curly-newline
-      const { bus_id, origin, destination, trip_date, fare, status, trip_id } = req.body;
+      const { bus_id, origin, destination, trip_date, fare } = req.body;
       if (!bus_id) {
         throw new APIError(400, 'Bus_id is required');
       }
@@ -141,12 +141,6 @@ export default class UserMiddleware {
       if (!fare) {
         throw new APIError(400, 'Fare is required');
       }
-      if (!status) {
-        throw new APIError(400, 'Status is required');
-      }
-      if (!trip_id) {
-        throw new APIError(400, 'Trip Id is required');
-      }
       if (typeof bus_id !== 'number') {
         throw new APIError(400, 'bus id should be a string');
       }
@@ -156,17 +150,8 @@ export default class UserMiddleware {
       if (typeof destination !== 'string') {
         throw new APIError(400, 'destination should be a string');
       }
-      if (Object.prototype.toString.call(trip_date) === '[object Date]') {
-        throw new APIError(400, 'Trip Date should be a proper date format ');
-      }
       if (typeof fare !== 'number') {
         throw new APIError(400, 'Trip fare should be a number');
-      }
-      if (typeof status !== 'string') {
-        throw new APIError(400, 'status should be a string');
-      }
-      if (typeof trip_id !== 'number') {
-        throw new APIError(400, 'Trip Id should be a number');
       }
 
       next();
