@@ -35,14 +35,14 @@ export default class UserController {
         const token = TokenMiddleWare.generateToken(user.email_address, user.user_id);
         user[0].token = token;
         delete user[0].password;
-        console.log(req.body);
+        console.log(res.body);
         res.status(200).json(new Response(true, 200, (user[0])));
       } else {
-        console.log(req.body);
+        console.log(res.body);
         res.status(401).json(new Response(false, 401, 'The password is incorrect'));
       }
     } catch (error) {
-      console.log(req.body);
+      console.log(res.body);
       res.status(error.statusCode || 500).json(
         new Response(false, error.statusCode || 500, error.message)
       );
