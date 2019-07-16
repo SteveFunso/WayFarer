@@ -23,6 +23,32 @@ export default class UserController {
     }
   }
 
+  // static async signIn(req, res) {
+  //   console.log(req.body);
+  //   try {
+  //     const { body } = req;
+  //     const user = await UserService.findUserByEmail(req.body.email_address);
+  //     if (user.length < 1) {
+  //       throw new APIError(404, 'The email is not associated with any user');
+  //     }
+  //     if (compareSync(body.password, user[0].password)) {
+  //       const token = TokenMiddleWare.generateToken(user.email_address, user.user_id);
+  //       user[0].token = token;
+  //       delete user[0].password;
+  //       console.log(res.body, res.status);
+  //       res.status(200).json(new Response(true, 200, (user[0])));
+  //     } else {
+  //       console.log(res.body, res.status);
+  //       res.status(401).json(new Response(false, 401, 'The password is incorrect'));
+  //     }
+  //   } catch (error) {
+  //     console.log(res.body, res.status);
+  //     res.status(error.statusCode || 500).json(
+  //       new Response(false, error.statusCode || 500, error.message)
+  //     );
+  //   }
+  // }
+
   static async signIn(req, res) {
     console.log(req.body);
     try {
@@ -35,14 +61,12 @@ export default class UserController {
         const token = TokenMiddleWare.generateToken(user.email_address, user.user_id);
         user[0].token = token;
         delete user[0].password;
-        console.log(res.body, res.status);
         res.status(200).json(new Response(true, 200, (user[0])));
       } else {
-        console.log(res.body, res.status);
         res.status(401).json(new Response(false, 401, 'The password is incorrect'));
       }
     } catch (error) {
-      console.log(res.body, res.status);
+      console.log(error.message);
       res.status(error.statusCode || 500).json(
         new Response(false, error.statusCode || 500, error.message)
       );
