@@ -47,4 +47,9 @@ export default class UserController {
     const allTrips = await UserService.getAllTrips();
     res.status(200).json(new Response(true, 200, allTrips));
   }
+
+  static async createBooking(req, res) {
+    const booking = await UserService.createBooking(req.body);
+    res.status(201).json(new Response(true, 201, booking));
+  }
 }
