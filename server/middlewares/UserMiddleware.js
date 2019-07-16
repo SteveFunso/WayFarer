@@ -123,7 +123,7 @@ export default class UserMiddleware {
 
   static async validateCreateTrip(req, res, next) {
     try {
-      // console.log(req.body);
+       console.log(req.body);
       // eslint-disable-next-line object-curly-newline
       const { bus_id, origin, destination, trip_date, fare, status, trip_id } = req.body;
       if (!bus_id) {
@@ -179,7 +179,7 @@ export default class UserMiddleware {
 
   static async checkIsAdmin(req, res, next) {
     try {
-    console.log(await req.body.verifiedUser);
+    //console.log(await req.body.verifiedUser);
       if (await req.body.verifiedUser.is_admin !== true) {
         throw new APIError(400, 'Only an Admin can cancel a trip');
       }
