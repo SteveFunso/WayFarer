@@ -156,4 +156,22 @@ export default class UserMiddleware {
       );
     }
   }
+
+  static async validateCreateBooking(req, res, next) {
+    try {
+      // eslint-disable-next-line object-curly-newline
+      const { user_id, trip_id } = req.body;
+      if (!user_id) {
+        throw new APIError(400, 'User Id is required');
+      }
+      if (!trip_id) {
+        throw new APIError(400, 'Trip Id is required');
+      }
+      next();
+    } catch (error) {
+      res.status(error.statusCode || 500).json(
+        new Response(false, error.statusCode || 500, error.message),
+      );
+    }
+  }
 }

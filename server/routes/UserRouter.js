@@ -9,4 +9,5 @@ userRouter.post('/auth/signin', UserMiddleware.validateSignIn, UserController.si
 userRouter.post('/createtrip', TokenMiddleWare.validateToken, UserMiddleware.validateCreateTrip, UserController.createTrip);
 userRouter.post('/canceltrip', TokenMiddleWare.validateToken, UserMiddleware.checkIsAdmin, UserController.cancleTrip);
 userRouter.get('/gettrips', TokenMiddleWare.validateToken, UserController.getAllTrips);
+userRouter.post('/createbooking', TokenMiddleWare.validateToken, UserMiddleware.validateCreateBooking, UserController.createBooking);
 export default userRouter;
