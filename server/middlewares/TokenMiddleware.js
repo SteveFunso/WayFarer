@@ -40,4 +40,34 @@ export default class TokenMiddleWare {
       );
     }
   }
+
+  // static async validateToken(req, res, next) {
+  //   let bearerHeader = req.headers.token;
+  //   try {
+  //     if (typeof bearerHeader === 'undefined') {
+  //       throw new APIError(400, 'Please provide a valid token');
+  //     }
+
+  //     if (bearerHeader.startsWith('Bearer ')) {
+  //       bearerHeader = bearerHeader.slice(7, bearerHeader.length);
+  //     }
+  //     jwt.verify(bearerHeader, process.env.JWT_KEY, async (err, decoded) => {
+  //       try {
+  //         if (err) {
+  //           throw new APIError(400, 'Invalid token');
+  //         }
+  //         const verifiedUser = await UserServices.findUserByEmail(decoded.email);
+  //         // eslint-disable-next-line prefer-destructuring
+  //         req.body.verifiedUser = verifiedUser[0];
+  //         next();
+  //       } catch (error) {
+  //         res.status(error.statusCode || 500).json(new Response(false, error.statusCode || 500, error.message));
+  //       }
+  //     });
+  //   } catch (error) {
+  //     res.status(error.statusCode || 500).json(
+  //       new Response(false, error.statusCode || 500, error.message),
+  //     );
+  //   }
+  // }
 }
