@@ -94,7 +94,6 @@ export default class UserMiddleware {
 
   static async validateSignIn(req, res, next) {
     try {
-      console.log(req.body);
       // eslint-disable-next-line object-curly-newline
       const { email, password } = req.body;
       if (!email) {
@@ -116,7 +115,6 @@ export default class UserMiddleware {
       req.body.email_address = email;
       next();
     } catch (error) {
-      console.log(error.message);
       res.status(error.statusCode || 500).json(
         new Response(false, error.statusCode || 500, error.message),
       );
@@ -181,7 +179,7 @@ export default class UserMiddleware {
 
   static async checkIsAdmin(req, res, next) {
     try {
-      // console.log(await req.body.verifiedUser);
+    console.log(await req.body.verifiedUser);
       if (await req.body.verifiedUser.is_admin !== true) {
         throw new APIError(400, 'Only an Admin can cancel a trip');
       }

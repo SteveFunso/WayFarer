@@ -9,7 +9,6 @@ import TokenMiddleWare from '../middlewares/TokenMiddleware';
 export default class UserController {
   static async signUp(req, res) {
     try {
-console.log(req.body);
       const pass = req.body.password;
       const password = hashSync(pass, genSaltSync(11));
       req.body.password = password;
@@ -18,7 +17,6 @@ console.log(req.body);
       delete user.password; // made a change
       res.status(201).json(new Response(true, 201, user));
     } catch (error) {
-console.log(error.message)
       res.status(error.statusCode || 500).json(
         new Response(false, error.statusCode || 500, error.message)
       );
