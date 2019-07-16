@@ -1,6 +1,6 @@
 export default class Response {
   constructor(success, statusCode, message) {
-    this.statusCode = statusCode;
+    this.status = statusCode;
     if (success) {
       this.data = message;
     } else {
