@@ -7,7 +7,7 @@ import UserServices from '../services/UserServices';
 export default class TokenMiddleWare {
   // eslint-disable-next-line camelcase
   static generateToken(email_address, id) {
-    const { token } = jwt.sign({ email: email_address, userId: id }, process.env.JWT_KEY, { expiresIn: '1h' });
+    const token = jwt.sign({ email: email_address, userId: id }, process.env.JWT_KEY, { expiresIn: '1h' });
     return token;
   }
 
