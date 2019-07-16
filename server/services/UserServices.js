@@ -63,7 +63,7 @@ export default class UserService {
     await pool.connect(query, [bookingId]);
   }
 
-  static async getAllBookings(body) {
+  static async getAllBookings() {
     const query = 'SELECT  booking_id, user_Id, trip_id FROM "Bookings"';
     const bookings = await pool.connect(query);
     return bookings;
