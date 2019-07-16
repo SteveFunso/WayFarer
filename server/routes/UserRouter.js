@@ -4,16 +4,13 @@ import UserMiddleware from '../middlewares/UserMiddleware';
 import TokenMiddleWare from '../middlewares/TokenMiddleware';
 
 const userRouter = express.Router();
-try {
-  userRouter.post('/auth/signup', UserController.signUp);
-  userRouter.post('/auth/signin', UserMiddleware.validateSignIn, UserController.signIn);
-  userRouter.post('/createtrip', TokenMiddleWare.validateToken, UserMiddleware.validateCreateTrip, UserController.createTrip);
-  userRouter.post('/canceltrip', TokenMiddleWare.validateToken, UserMiddleware.checkIsAdmin, UserController.cancleTrip);
-  userRouter.get('/gettrips', TokenMiddleWare.validateToken, UserController.getAllTrips);
-  userRouter.post('/createbooking', TokenMiddleWare.validateToken, UserMiddleware.validateCreateBooking, UserController.createBooking);
-  userRouter.post('/deletebooking', TokenMiddleWare.validateToken, UserController.deleteBookings);
-  userRouter.get('/getbookings', TokenMiddleWare.validateToken, UserController.getBookings);
-} catch (error) {
-  console.log(error);
-}
+
+userRouter.post('/auth/signup', UserController.signUp);
+userRouter.post('/auth/signin', UserMiddleware.validateSignIn, UserController.signIn);
+userRouter.post('/trips', TokenMiddleWare.validateToken, UserMiddleware.validateCreateTrip, UserController.createTrip);
+userRouter.patch('/trips/:tripId', TokenMiddleWare.validateToken, UserMiddleware.checkIsAdmin, UserController.cancleTrip);
+userRouter.get('/trips', TokenMiddleWare.validateToken, UserController.getAllTrips);
+userRouter.post('/bookings', TokenMiddleWare.validateToken, UserMiddleware.validateCreateBooking, UserController.createBooking);
+userRouter.delete('/bookings/:bookingId', TokenMiddleWare.validateToken, UserController.deleteBookings);
+userRouter.get('/bookings', TokenMiddleWare.validateToken, UserController.getBookings);
 export default userRouter;
