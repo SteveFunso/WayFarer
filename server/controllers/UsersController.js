@@ -110,6 +110,8 @@ export default class UserController {
   static async createBooking(req, res) {
     try {
       const booking = await UserService.createBooking(req.body);
+      booking.id = booking.booking_id;
+      delete booking.booking_id;
       res.status(201).json(new Response(true, 201, booking));
     } catch (error) {
       res.status(error.statusCode || 500).json(
