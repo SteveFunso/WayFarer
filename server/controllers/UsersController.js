@@ -137,6 +137,7 @@ export default class UserController {
     }
   }
 
+
   static async deleteBookings(req, res) {
     try {
       await UserService.deleteBooking(req.body.booking_id);
