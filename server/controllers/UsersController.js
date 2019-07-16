@@ -74,6 +74,8 @@ export default class UserController {
   static async createTrip(req, res) {
     try {
       const trip = await UserService.createTrip(req.body);
+      trip.id = trip.trip_id;
+      delete trip.trip_id;
       res.status(201).json(new Response(true, 201, trip));
     } catch (error) {
       res.status(error.statusCode || 500).json(
