@@ -91,6 +91,7 @@ export default class UserMiddleware {
 
   static async validateCreateTrip(req, res, next) {
     try {
+      console.log(req.body);
       // eslint-disable-next-line object-curly-newline
       const { bus_id, origin, destination, trip_date, fare, status, trip_id } = req.body;
       if (!bus_id) {
