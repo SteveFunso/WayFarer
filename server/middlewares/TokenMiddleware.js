@@ -28,7 +28,6 @@ export default class TokenMiddleWare {
           }
           const verifiedUser = await UserServices.findUserByEmail(decoded.email);
           req.body.verifiedUser = verifiedUser[0];
-          req.body.email_address = req.body.email;
           next();
         } catch (error) {
           res.status(error.statusCode || 500).json(new Response(false, error.statusCode || 500, error.message));
