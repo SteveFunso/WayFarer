@@ -57,4 +57,9 @@ export default class UserService {
     const bookings = await pool.connect(query, [body.user_id, body.trip_id]);
     return bookings[0];
   }
+
+  static async deleteBooking(bookingId) {
+    const query = 'Delete FROM "Bookings" WHERE booking_id = $1';
+    await pool.connect(query, [bookingId]);
+  }
 }
