@@ -54,7 +54,7 @@ export default class UserMiddleware {
   static async validateSignUp(req, res, next) {
     try {
       // eslint-disable-next-line object-curly-newline
-      const { first_name, last_name, email, is_admin, password } = req.body;
+      const { first_name, last_name, email, password } = req.body;
       if (!first_name) {
         throw new APIError(400, 'first_name is required');
       }
@@ -79,9 +79,6 @@ export default class UserMiddleware {
       }
       if (user.length > 0) {
         throw new APIError(400, 'email_address already exists');
-      }
-      if (typeof is_admin !== 'boolean') {
-        throw new APIError(400, 'admin should be boolean');
       }
       if (typeof password !== 'string') {
         throw new APIError(400, 'Password must be a field');
