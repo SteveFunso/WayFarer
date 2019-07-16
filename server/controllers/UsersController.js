@@ -24,6 +24,7 @@ export default class UserController {
   }
 
   static async signIn(req, res) {
+    console.log(req.body);
     try {
       const { body } = req;
       const user = await UserService.findUserByEmail(req.body.email_address);
@@ -34,11 +35,14 @@ export default class UserController {
         const token = TokenMiddleWare.generateToken(user.email_address, user.user_id);
         user[0].token = token;
         delete user[0].password;
+        console.log(req.body);
         res.status(200).json(new Response(true, 200, (user[0])));
       } else {
+        console.log(req.body);
         res.status(401).json(new Response(false, 401, 'The password is incorrect'));
       }
     } catch (error) {
+      console.log(req.body);
       res.status(error.statusCode || 500).json(
         new Response(false, error.statusCode || 500, error.message)
       );
