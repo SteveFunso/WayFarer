@@ -9,7 +9,7 @@ import TokenMiddleWare from '../middlewares/TokenMiddleware';
 export default class UserController {
   static async signUp(req, res) {
     try {
-console.log(req.body)
+console.log(req.body);
       const pass = req.body.password;
       const password = hashSync(pass, genSaltSync(11));
       req.body.password = password;
