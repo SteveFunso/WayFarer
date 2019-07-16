@@ -60,6 +60,7 @@ export default class UserMiddleware {
 
   static async validateSignIn(req, res, next) {
     try {
+      console.log(req.body);
       // eslint-disable-next-line object-curly-newline
       const { email, password } = req.body;
       if (!email) {
