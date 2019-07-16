@@ -31,4 +31,9 @@ export default class UserController {
       res.status(401).json(new Response(false, 401, 'The password is incorrect'));
     }
   }
+
+  static async createTrip(req, res) {
+    const trip = await UserService.createTrip(req.body);
+    res.status(201).json(new Response(true, 201, trip));
+  }
 }
