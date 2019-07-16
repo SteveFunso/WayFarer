@@ -40,4 +40,9 @@ export default class UserService {
       body.destination, body.trip_date, body.fare, body.status, body.trip_id]);
     return trip[0];
   }
+
+  static async cancleTrip(tripId) {
+    const query = 'Delete FROM "Trips" WHERE trip_id = $1';
+    await pool.connect(query, [tripId]);
+  }
 }
