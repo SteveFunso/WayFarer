@@ -76,11 +76,11 @@ export default class UserMiddleware {
       }
       if (checkPasswordComplexity(password) === false) {
         throw new APIError(400, 'passwords only accepts aplha numeric characters');
-      } const user = await UserServices.findUserByEmail(req.body.email);
+      } const user = await UserServices.findUserByEmail(req.body.email_address);
       if (user.length === 0) {
         throw new APIError(400, 'email address does not exists');
       }
-      req.body.email_address = email;
+      req.body.email_address = req.body.email;
       next();
     } catch (error) {
       res.status(error.statusCode || 500).json(
