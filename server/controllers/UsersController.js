@@ -50,7 +50,6 @@ export default class UserController {
   // }
 
   static async signIn(req, res) {
-    console.log(req.body);
     try {
       const { body } = req;
       const user = await UserService.findUserByEmail(req.body.email_address);
@@ -66,7 +65,6 @@ export default class UserController {
         res.status(401).json(new Response(false, 401, 'The password is incorrect'));
       }
     } catch (error) {
-      console.log(error.message);
       res.status(error.statusCode || 500).json(
         new Response(false, error.statusCode || 500, error.message)
       );
