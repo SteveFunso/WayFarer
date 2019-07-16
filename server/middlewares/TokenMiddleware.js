@@ -12,7 +12,8 @@ export default class TokenMiddleWare {
   }
 
   static async validateToken(req, res, next) {
-    let bearerHeader = req.headers.token;
+    let bearerHeader = req.headers['x-access-token'] || req.headers.token || req.body.token;
+    // Const bearHeader =  req.headers['x-access-token'] || req.headers.token || req.body.token;
     try {
       if (typeof bearerHeader === 'undefined') {
         throw new APIError(400, 'Please provide a valid token');
