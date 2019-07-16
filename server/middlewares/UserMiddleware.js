@@ -68,16 +68,16 @@ export default class UserMiddleware {
       if (typeof password !== 'string') {
         throw new APIError(400, 'Password must be a field');
       }
-      const user = await UserServices.findUserByEmail(req.body.email);
-      if (user.length === 0) {
-        throw new APIError(400, 'email address does not exists');
-      }
+      // const user = await UserServices.findUserByEmail(req.body.email);
+      // if (user.length === 0) {
+      //   throw new APIError(400, 'email address does not exists');
+      // }
       req.body.email_address = email;
       next();
     } catch (error) {
       res.status(error.statusCode || 500).json(
-        new Response(false, error.statusCode || 500, error.message)
-);
+        new Response(false, error.statusCode || 500, error.message),
+      );
     }
   }
 
