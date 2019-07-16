@@ -58,6 +58,37 @@ export default class UserMiddleware {
   //   }
   // }
 
+  static async validateSignIn(req, res, next) {
+    try {
+      console.log(req.body);
+      // eslint-disable-next-line object-curly-newline
+      const { email, password } = req.body;
+      if (!email) {
+        throw new APIError(400, 'email_address is required');
+      }
+      if (!password) {
+        throw new APIError(400, 'password is required');
+      }
+      if (typeof email !== 'string') {
+        throw new APIError(400, 'email_address should be a string');
+      }
+      if (typeof password !== 'string') {
+        throw new APIError(400, 'Password must be a field');
+      }
+      if (checkPasswordComplexity(password) === false) {
+        throw new APIError(400, 'passwords only accepts aplha numeric characters');
+      } const user = await UserServices.findUserByEmail(req.body.email);
+      if (user.length === 0) {
+        throw new APIError(400, 'email address does not exists');
+      }
+      req.body.email_address = email;
+      next();
+    } catch (error) {
+      res.status(error.statusCode || 500).json(
+        new Response(false, error.statusCode || 500, error.message));
+    }
+  }
+
 
   static async validateCreateTrip(req, res, next) {
     try {
