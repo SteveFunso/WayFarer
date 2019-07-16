@@ -45,4 +45,10 @@ export default class UserService {
     const query = 'Delete FROM "Trips" WHERE trip_id = $1';
     await pool.connect(query, [tripId]);
   }
+
+  static async getAllTrips() {
+    const query = 'SELECT  bus_id, origin, destination, trip_date,fare,status,trip_id FROM "Trips"';
+    const allTrips = await pool.connect(query);
+    return allTrips;
+  }
 }
