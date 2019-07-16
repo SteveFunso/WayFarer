@@ -33,4 +33,11 @@ export default class UserService {
     }
     return false;
   }
+
+  static async createTrip(body) {
+    const query = 'INSERT INTO "Trips" ( bus_id, origin, destination, trip_date,fare,status,trip_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *';
+    const trip = await pool.connect(query, [body.bus_id, body.origin,
+      body.destination, body.trip_date, body.fare, body.status, body.trip_id]);
+    return trip[0];
+  }
 }
