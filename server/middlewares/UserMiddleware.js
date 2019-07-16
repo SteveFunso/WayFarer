@@ -121,41 +121,15 @@ export default class UserMiddleware {
     }
   }
 
-  static async validateCreateTrip(req, res, next) {
+  static async createBooking(req, res) {
+    console.log(req.body);
     try {
-      console.log(req.body);
-      // eslint-disable-next-line object-curly-newline
-      const { bus_id, origin, destination, trip_date, fare } = req.body;
-      if (!bus_id) {
-        throw new APIError(400, 'Bus_id is required');
-      }
-      if (!origin) {
-        throw new APIError(400, 'Origin is required');
-      }
-      if (!destination) {
-        throw new APIError(400, 'Destination is required');
-      }
-      if (!trip_date) {
-        throw new APIError(400, 'Trip Date is required');
-      }
-      if (!fare) {
-        throw new APIError(400, 'Fare is required');
-      }
-      if (typeof bus_id !== 'number') {
-        throw new APIError(400, 'bus id should be a string');
-      }
-      if (typeof origin !== 'string') {
-        throw new APIError(400, 'origin should be a string');
-      }
-      if (typeof destination !== 'string') {
-        throw new APIError(400, 'destination should be a string');
-      }
-      if (typeof fare !== 'number') {
-        throw new APIError(400, 'Trip fare should be a number');
-      }
-
-      next();
+      const booking = await UserServices.createBooking(req.body);
+      booking.id = booking.booking_id;
+      delete booking.booking_id;
+      res.status(201).json(new Response(true, 201, booking));
     } catch (error) {
+      console.log(error.message);
       res.status(error.statusCode || 500).json(
         new Response(false, error.statusCode || 500, error.message),
       );
@@ -164,7 +138,7 @@ export default class UserMiddleware {
 
   static async checkIsAdmin(req, res, next) {
     try {
-    //console.log(await req.body.verifiedUser);
+      // console.log(await req.body.verifiedUser);
       if (await req.body.verifiedUser.is_admin !== true) {
         throw new APIError(400, 'Only an Admin can cancel a trip');
       }
