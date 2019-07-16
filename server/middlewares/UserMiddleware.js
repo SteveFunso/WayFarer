@@ -62,7 +62,7 @@ export default class UserMiddleware {
     try {
       // eslint-disable-next-line object-curly-newline
       const { email, password } = req.body;
-      if (!emai) {
+      if (!email) {
         throw new APIError(400, 'email_address is required');
       }
       if (!password) {
@@ -76,11 +76,11 @@ export default class UserMiddleware {
       }
       if (checkPasswordComplexity(password) === false) {
         throw new APIError(400, 'passwords only accepts aplha numeric characters');
-      } const user = await UserServices.findUserByEmail(req.body.email_address);
+      } const user = await UserServices.findUserByEmail(req.body.email);
       if (user.length === 0) {
         throw new APIError(400, 'email address does not exists');
       }
-      req.body.email_address = req.body.email;
+      req.body.email_address = email;
       next();
     } catch (error) {
       res.status(error.statusCode || 500).json(
