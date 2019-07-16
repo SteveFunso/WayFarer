@@ -7,21 +7,21 @@ import TokenMiddleWare from '../middlewares/TokenMiddleware';
 
 
 export default class UserController {
-  // static async signUp(req, res) {
-  //   try {
-  //     const pass = req.body.password;
-  //     const password = hashSync(pass, genSaltSync(11));
-  //     req.body.password = password;
-  //     const user = await UserService.createUser(req.body);
-  //     user.token = TokenMiddleWare.generateToken(user.email_address, user.user_id); // made a change
-  //     delete user.password; // made a change
-  //     res.status(201).json(new Response(true, 201, user));
-  //   } catch (error) {
-  //     res.status(error.statusCode || 500).json(
-  //       new Response(false, error.statusCode || 500, error.message)
-  //     );
-  //   }
-  // }
+  static async signUp(req, res) {
+    try {
+      const pass = req.body.password;
+      const password = hashSync(pass, genSaltSync(11));
+      req.body.password = password;
+      const user = await UserService.createUser(req.body);
+      user.token = TokenMiddleWare.generateToken(user.email_address, user.user_id); // made a change
+      delete user.password; // made a change
+      res.status(201).json(new Response(true, 201, user));
+    } catch (error) {
+      res.status(error.statusCode || 500).json(
+        new Response(false, error.statusCode || 500, error.message)
+      );
+    }
+  }
 
   static async signIn(req, res) {
     try {
