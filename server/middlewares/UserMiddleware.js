@@ -75,6 +75,7 @@ export default class UserMiddleware {
       req.body.email_address = email;
       next();
     } catch (error) {
+     console.log(error);
       res.status(error.statusCode || 500).json(
         new Response(false, error.statusCode || 500, error.message),
       );
