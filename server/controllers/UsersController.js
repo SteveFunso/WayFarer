@@ -52,4 +52,10 @@ export default class UserController {
     const booking = await UserService.createBooking(req.body);
     res.status(201).json(new Response(true, 201, booking));
   }
+
+  static async deleteBookings(req, res) {
+    await UserService.deleteBooking(req.body.booking_id);
+    const message = 'Booking deleted successfully';
+    res.status(200).json(new Response(true, 200, message));
+  }
 }

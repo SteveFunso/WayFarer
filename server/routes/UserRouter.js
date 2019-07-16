@@ -10,4 +10,5 @@ userRouter.post('/createtrip', TokenMiddleWare.validateToken, UserMiddleware.val
 userRouter.post('/canceltrip', TokenMiddleWare.validateToken, UserMiddleware.checkIsAdmin, UserController.cancleTrip);
 userRouter.get('/gettrips', TokenMiddleWare.validateToken, UserController.getAllTrips);
 userRouter.post('/createbooking', TokenMiddleWare.validateToken, UserMiddleware.validateCreateBooking, UserController.createBooking);
+userRouter.post('/deletebooking', TokenMiddleWare.validateToken, UserController.deleteBookings);
 export default userRouter;
