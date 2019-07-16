@@ -53,7 +53,7 @@ export default class UserService {
   }
 
   static async createBooking(body) {
-    const query = 'INSERT INTO "Bookings" ( user_id,is_admin,trip_id) VALUES ($1, $2, $3) RETURNING *';
+    const query = 'INSERT INTO "Bookings" ( user_id,trip_id) VALUES ($1, $2) RETURNING *';
     const bookings = await pool.connect(query, [body.user_id, body.trip_id, body.is_admin]);
     return bookings[0];
   }
