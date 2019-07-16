@@ -121,15 +121,56 @@ export default class UserMiddleware {
     }
   }
 
-  static async createBooking(req, res) {
-    console.log(req.body);
+  static async validateCreateTrip(req, res, next) {
     try {
-      const booking = await UserServices.createBooking(req.body);
-      booking.id = booking.booking_id;
-      delete booking.booking_id;
-      res.status(201).json(new Response(true, 201, booking));
+      // console.log(req.body);
+      // eslint-disable-next-line object-curly-newline
+      const { bus_id, origin, destination, trip_date, fare, status, trip_id } = req.body;
+      if (!bus_id) {
+        throw new APIError(400, 'Bus_id is required');
+      }
+      if (!origin) {
+        throw new APIError(400, 'Origin is required');
+      }
+      if (!destination) {
+        throw new APIError(400, 'Destination is required');
+      }
+      if (!trip_date) {
+        throw new APIError(400, 'Trip Date is required');
+      }
+      if (!fare) {
+        throw new APIError(400, 'Fare is required');
+      }
+      if (!status) {
+        throw new APIError(400, 'Status is required');
+      }
+      if (!trip_id) {
+        throw new APIError(400, 'Trip Id is required');
+      }
+      if (typeof bus_id !== 'number') {
+        throw new APIError(400, 'bus id should be a string');
+      }
+      if (typeof origin !== 'string') {
+        throw new APIError(400, 'origin should be a string');
+      }
+      if (typeof destination !== 'string') {
+        throw new APIError(400, 'destination should be a string');
+      }
+      if (Object.prototype.toString.call(trip_date) === '[object Date]') {
+        throw new APIError(400, 'Trip Date should be a proper date format ');
+      }
+      if (typeof fare !== 'number') {
+        throw new APIError(400, 'Trip fare should be a number');
+      }
+      if (typeof status !== 'string') {
+        throw new APIError(400, 'status should be a string');
+      }
+      if (typeof trip_id !== 'number') {
+        throw new APIError(400, 'Trip Id should be a number');
+      }
+
+      next();
     } catch (error) {
-      console.log(error.message);
       res.status(error.statusCode || 500).json(
         new Response(false, error.statusCode || 500, error.message),
       );

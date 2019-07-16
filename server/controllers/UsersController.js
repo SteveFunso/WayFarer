@@ -6,7 +6,7 @@ import APIError from '../model/errors';
 import TokenMiddleWare from '../middlewares/TokenMiddleware';
 
 
- export default class UserController {
+export default class UserController {
 //   static async signUp(req, res) {
 //     try {
 //       const pass = req.body.password;
@@ -23,20 +23,20 @@ import TokenMiddleWare from '../middlewares/TokenMiddleware';
 //     }
 //   }
 
-  static async createBooking(req, res) {
-    console.log(req.body);
-    try {
-      const booking = await UserService.createBooking(req.body);
-      booking.id = booking.booking_id;
-      delete booking.booking_id;
-      res.status(201).json(new Response(true, 201, booking));
-    } catch (error) {
-      console.log(error.message);
-      res.status(error.statusCode || 500).json(
-        new Response(false, error.statusCode || 500, error.message)
-      );
-    }
-  }
+  // static async createBooking(req, res) {
+  //   console.log(req.body);
+  //   try {
+  //     const booking = await UserService.createBooking(req.body);
+  //     booking.id = booking.booking_id;
+  //     delete booking.booking_id;
+  //     res.status(201).json(new Response(true, 201, booking));
+  //   } catch (error) {
+  //     console.log(error.message);
+  //     res.status(error.statusCode || 500).json(
+  //       new Response(false, error.statusCode || 500, error.message)
+  //     );
+  //   }
+  // }
 
   // static async signIn(req, res) {
   //   console.log(req.body);
