@@ -6,7 +6,7 @@ import TokenMiddleWare from '../middlewares/TokenMiddleware';
 const userRouter = express.Router();
 
 userRouter.post('/auth/signup', UserController.signUp);
-userRouter.post('/auth/signin', UserMiddleware.validateSignIn, UserController.signIn);
+userRouter.post('/auth/signin', UserController.signIn);
 userRouter.post('/trips', TokenMiddleWare.validateToken, UserMiddleware.validateCreateTrip, UserController.createTrip);
 userRouter.patch('/trips/:tripId', TokenMiddleWare.validateToken, UserMiddleware.checkIsAdmin, UserController.cancleTrip);
 userRouter.get('/trips', TokenMiddleWare.validateToken, UserController.getAllTrips);
