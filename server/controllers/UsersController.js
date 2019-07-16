@@ -17,6 +17,7 @@ export default class UserController {
       delete user.password; // made a change
       res.status(201).json(new Response(true, 201, user));
     } catch (error) {
+       console.log(error.message);
       res.status(error.statusCode || 500).json(
         new Response(false, error.statusCode || 500, error.message)
       );
