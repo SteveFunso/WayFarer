@@ -36,4 +36,10 @@ export default class UserController {
     const trip = await UserService.createTrip(req.body);
     res.status(201).json(new Response(true, 201, trip));
   }
+
+  static async cancleTrip(req, res) {
+    await UserService.cancleTrip(req.body.trip_id);
+    const message = 'Trip cancelled successfully';
+    res.status(200).json(new Response(true, 200, message));
+  }
 }
