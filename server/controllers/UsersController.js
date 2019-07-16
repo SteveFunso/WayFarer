@@ -42,4 +42,9 @@ export default class UserController {
     const message = 'Trip cancelled successfully';
     res.status(200).json(new Response(true, 200, message));
   }
+
+  static async getAllTrips(req, res) {
+    const allTrips = await UserService.getAllTrips();
+    res.status(200).json(new Response(true, 200, allTrips));
+  }
 }

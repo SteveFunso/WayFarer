@@ -8,4 +8,5 @@ userRouter.post('/auth/signup', UserMiddleware.validateSignUp, UserController.si
 userRouter.post('/auth/signin', UserMiddleware.validateSignIn, UserController.signIn);
 userRouter.post('/createtrip', TokenMiddleWare.validateToken, UserMiddleware.validateCreateTrip, UserController.createTrip);
 userRouter.post('/canceltrip', TokenMiddleWare.validateToken, UserMiddleware.checkIsAdmin, UserController.cancleTrip);
+userRouter.get('/gettrips', TokenMiddleWare.validateToken, UserController.getAllTrips);
 export default userRouter;
