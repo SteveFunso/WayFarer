@@ -64,13 +64,13 @@ export default class UserService {
   }
 
   static async getAllBookings() {
-    const query = 'SELECT  booking_id, user_Id, trip_id FROM "Bookings"';
+    const query = 'SELECT  booking_id, user_id, trip_id FROM "Bookings"';
     const bookings = await pool.connect(query);
     return bookings;
   }
 
   static async getBookingsForUser(userId) {
-    const query = 'SELECT  booking_id, user_Id, trip_id FROM "Bookings" WHERE user_id = $1';
+    const query = 'SELECT  booking_id, user_id, trip_id FROM "Bookings" WHERE user_id = $1';
     const booking = await pool.connect(query, [userId]);
     return booking;
   }
