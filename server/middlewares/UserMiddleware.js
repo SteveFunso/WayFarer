@@ -123,7 +123,7 @@ export default class UserMiddleware {
 
   static async validateCreateTrip(req, res, next) {
     try {
-      console.log(req.body);
+      console.log('validateCreateBooking Validate: ', req.body);
       // eslint-disable-next-line object-curly-newline
       const { bus_id, origin, destination, trip_date, fare } = req.body;
       if (!bus_id) {
@@ -178,7 +178,7 @@ export default class UserMiddleware {
 
   static async validateCreateBooking(req, res, next) {
     try {
-console.log(req.body);
+console.log('validateCreateBooking: ', req.body);
       // eslint-disable-next-line object-curly-newline
       const { user_id, trip_id } = req.body;
       if (!user_id) {
@@ -189,7 +189,7 @@ console.log(req.body);
       }
       next();
     } catch (error) {
-console.log(error.message);
+console.log('validateCreateBooking ERROR: ', error.message);
       res.status(error.statusCode || 500).json(
         new Response(false, error.statusCode || 500, error.message),
       );
