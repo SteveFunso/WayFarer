@@ -42,8 +42,10 @@ export default class UserService {
   }
 
   static async cancleTrip(tripId) {
-    const query = 'Delete FROM "Trips" WHERE trip_id = $1';
-    await pool.connect(query, [tripId]);
+    const query = 'UPDATE "Trips" SET status = $1 WHERE trip_id = $2 RETURNING *';
+    const trip = await pool.connect(query, ['cancelled', tripId]);
+
+    return trip[0];
   }
 
   static async getAllTrips() {
