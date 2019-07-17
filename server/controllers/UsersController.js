@@ -101,11 +101,11 @@ export default class UserController {
 
   static async cancleTrip(req, res) {
     try {
-console.log('Cancle Trip try', req.body)
+//console.log('Cancle Trip try', req.body);
       const trip = await UserService.cancleTrip(req.body.trip_id);
       res.status(200).json(new Response(true, 200, trip));
     } catch (error) {
-console.log('cancle trip catch: ', error.message)
+//console.log('cancle trip catch: ', error.message);
       res.status(error.statusCode || 500).json(
         new Response(false, error.statusCode || 500, error.message)
       );

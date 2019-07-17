@@ -164,12 +164,14 @@ export default class UserMiddleware {
 
   static async checkIsAdmin(req, res, next) {
     try {
+console.log(req.body)
       // console.log(await req.body.verifiedUser);
       if (await req.body.verifiedUser.is_admin !== true) {
         throw new APIError(400, 'Only an Admin can cancel a trip');
       }
       next();
     } catch (error) {
+console.log(error.message)
       res.status(error.statusCode || 500).json(
         new Response(false, error.statusCode || 500, error.message),
       );
