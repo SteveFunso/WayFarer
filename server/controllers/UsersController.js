@@ -124,14 +124,14 @@ console.log('cancle trip catch: ', error.message)
   }
 
   static async createBooking(req, res) {
-    console.log('CreateBooking try', req.body);
+    // console.log('CreateBooking try', req.body);
     try {
       const booking = await UserService.createBooking(req.body);
       booking.id = booking.booking_id;
       delete booking.booking_id;
       res.status(201).json(new Response(true, 201, booking));
     } catch (error) {
-      console.log('CreateBooking catch', error.message);
+      // console.log('CreateBooking catch', error.message);
       res.status(error.statusCode || 500).json(
         new Response(false, error.statusCode || 500, error.message)
       );
