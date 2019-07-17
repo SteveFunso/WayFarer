@@ -35,9 +35,9 @@ export default class UserService {
   }
 
   static async createTrip(body) {
-    const query = 'INSERT INTO "Trips" ( bus_id, origin, destination, trip_date,fare) VALUES ($1, $2, $3, $4, $5) RETURNING *';
+    const query = 'INSERT INTO "Trips" ( bus_id, origin, destination, trip_date,fare, status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
     const trip = await pool.connect(query, [body.bus_id, body.origin,
-      body.destination, body.trip_date, body.fare]);
+      body.destination, body.trip_date, body.fare, 'active']);
     return trip[0];
   }
 
