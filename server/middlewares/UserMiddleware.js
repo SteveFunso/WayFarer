@@ -164,14 +164,14 @@ export default class UserMiddleware {
 
   static async checkIsAdmin(req, res, next) {
     try {
-console.log(req.body)
+      console.log(req.body);
       // console.log(await req.body.verifiedUser);
       if (await req.body.verifiedUser.is_admin !== true) {
         throw new APIError(400, 'Only an Admin can cancel a trip');
       }
       next();
     } catch (error) {
-console.log(error.message)
+      console.log(error.message);
       res.status(error.statusCode || 500).json(
         new Response(false, error.statusCode || 500, error.message),
       );
@@ -180,7 +180,7 @@ console.log(error.message)
 
   static async validateCreateBooking(req, res, next) {
     try {
-// console.log('validateCreateBooking try: ', req.body);
+      // console.log('validateCreateBooking try: ', req.body);
       // eslint-disable-next-line object-curly-newline
       const { user_id, trip_id } = req.body;
       if (!user_id) {
@@ -191,7 +191,7 @@ console.log(error.message)
       }
       next();
     } catch (error) {
-// console.log('validateCreateBooking catch: ', error.message);
+      // console.log('validateCreateBooking catch: ', error.message);
       res.status(error.statusCode || 500).json(
         new Response(false, error.statusCode || 500, error.message),
       );
