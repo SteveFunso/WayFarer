@@ -9,14 +9,14 @@ export default class UserService {
     return user[0];
   }
 
-  // PLEASE DON'T TOUCH THIS
+  //
   static async findUserByEmail(email) {
     const query = 'SELECT * FROM "Users" WHERE email_address = $1';
     const user = await pool.connect(query, [email]);
     return user;
   }
 
-  // PLEASE DON'T TOUCH THIS
+  //
   static async findUserByPass(pass) {
     const query = 'SELECT * FROM "Users" WHERE password = $1';
     const user = await pool.connect(query, [pass]);
