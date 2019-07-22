@@ -142,7 +142,7 @@ export default class UserController {
 
   static async deleteBookings(req, res) {
     try {
-      await UserService.deleteBooking(req.body.booking_id);
+      await UserService.deleteBooking(req.params.bookingId);
       const message = 'Booking deleted successfully';
       res.status(200).json(new Response(true, 200, message));
     } catch (error) {
@@ -152,13 +152,33 @@ export default class UserController {
     }
   }
 
+  //   static async getBookings(req, res) {
+  //     let booking;
+  //     try {
+  //       if (await req.body.verifiedUser.is_admin === true) {
+  //         booking = await UserService.getAllBookings(req.body);
+  //       } else {
+  //         booking = await UserService.getBookingsForUser(req.body.user_id);
+  //       }
+  //       res.status(200).json(new Response(true, 200, booking));
+  //     } catch (error) {
+  //       res.status(error.statusCode || 500).json(
+  //         new Response(false, error.statusCode || 500, error.message)
+  //       );
+  //     }
+  //   }
+  // }
+
   static async getBookings(req, res) {
     let booking;
     try {
-      if (await req.body.verifiedUser.is_admin === true) {
+    //if (await req.body.verifiedUser.is_admin === true)
+      {
         booking = await UserService.getAllBookings(req.body);
-      } else {
-        booking = await UserService.getBookingsForUser(req.body.user_id);
+      }
+      //else
+      {
+      //booking = await UserService.getBookingsForUser(req.body.user_id);
       }
       res.status(200).json(new Response(true, 200, booking));
     } catch (error) {

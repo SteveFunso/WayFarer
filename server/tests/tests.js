@@ -228,7 +228,7 @@ describe('POST  /api/v1/bookings', () => {
 // eslint-disable-next-line no-undef
 describe('GET  /api/v1/bookings', () => {
   // eslint-disable-next-line no-undef
-  it('should create a new booking', (done) => {
+  it('should get bookings', (done) => {
     chai.request(app)
       .get('/api/v1/bookings')
       .send({
@@ -258,7 +258,7 @@ describe('GET  /api/v1/bookings', () => {
 // eslint-disable-next-line no-undef
 describe('DELETE  /api/v1/bookings/15', () => {
   // eslint-disable-next-line no-undef
-  it('should create a new booking', (done) => {
+  it('should delete a new booking', (done) => {
     chai.request(app)
       .delete('/api/v1/bookings/15')
       .send({
