@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/SteveFunso/WayFarer#readme",
   "dependencies": {
-    "bcrypt": "3.0.6",
+    "bcrypt": "5.0.0",
     "dotenv": "^8.0.0",
     "email-existence": "^0.1.6",
     "express": "^4.17.1",
